@@ -1,4 +1,4 @@
-import java.sql.Time;
+import java.time.LocalTime;
 
 public interface MedicineInterface {
 
@@ -10,12 +10,12 @@ public interface MedicineInterface {
     /**
      * @return
      */
-    public Time getMedicineTMax();
+    public LocalTime getMedicineTMax();
 
     /**
      * @return
      */
-    public Time getHalfLife();
+    public LocalTime getHalfLife();
 
 
     /**

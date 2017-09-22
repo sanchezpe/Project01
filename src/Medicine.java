@@ -1,14 +1,14 @@
-import java.sql.Time;
+import java.time.LocalTime;
 
 public class Medicine implements MedicineInterface {
-    String medicineName;
-    Time tMax;
-    Time halfLife;
+    private String medicineName;
+    private LocalTime tMax;
+    private LocalTime halfLife;
 
 
-    public void Medicine(String medicineName,Time tMax, Time halfLife ){
+    public Medicine(String medicineName, int tMax, LocalTime halfLife) {
         this.medicineName = medicineName;
-        this.tMax = tMax;
+        this.tMax = new LocalTime(tMax,0,0,0);
         this.halfLife = halfLife;
 
     }
@@ -19,13 +19,13 @@ public class Medicine implements MedicineInterface {
     }
 
     @Override
-    public Time getMedicineTMax() {
-        return null;
+    public LocalTime getMedicineTMax() {
+        return tMax;
     }
 
     @Override
-    public Time getHalfLife() {
-        return null;
+    public LocalTime getHalfLife() {
+        return halfLife;
     }
 
 }

@@ -1,4 +1,4 @@
-import java.sql.Time;
+import java.time.LocalTime;
 
 public interface DoseInterface {
 
@@ -10,13 +10,13 @@ public interface DoseInterface {
     /**
      * @return
      */
-    public Time getDoseTakenTime();
+    public LocalTime getDoseTakenTime();
 
     /**
      * @param givenTime
      * @return
      */
-    public Double getConcentrationAmount(Time givenTime);
+    public Double getConcentrationAmount(LocalTime givenTime);
 
     /**
      * @return
@@ -35,7 +35,7 @@ public interface DoseInterface {
      * @param givenTime
      * @return
      */
-    public Double whatIf(Double doseAmount, Time... givenTime);
+    public Double whatIf(Double doseAmount, LocalTime... givenTime);
 
     /**
      * @return
@@ -45,7 +45,7 @@ public interface DoseInterface {
     /**
      * @return
      */
-    public Time whenToDose();
+    public LocalTime whenToDose();
 
     /**
      * @return

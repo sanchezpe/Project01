@@ -1,16 +1,13 @@
-import java.sql.Time;
-import org.joda.time.LocalTime;
-
-
+import java.time.LocalTime;
 
 public class Dose implements DoseInterface {
 
     Medicine medicine;
     Double amountMedicine;
-    LocalTime timePatientTakesMedicine = new LocalTime();
+    LocalTime timePatientTakesMedicine;
 
 
-    public void Dose(Double amountMedicine,Time... timePatientTakesMedicine){
+    public void Dose(Double amountMedicine,LocalTime... timePatientTakesMedicine){
         this.amountMedicine= amountMedicine;
     }
     @Override
@@ -19,12 +16,12 @@ public class Dose implements DoseInterface {
     }
 
     @Override
-    public Time getDoseTakenTime() {
+    public LocalTime getDoseTakenTime() {
         return null;
     }
 
     @Override
-    public Double getConcentrationAmount(Time givenTime) {
+    public Double getConcentrationAmount(LocalTime givenTime) {
         return null;
     }
 
@@ -34,7 +31,7 @@ public class Dose implements DoseInterface {
     }
 
     @Override
-    public Double whatIf(Double doseAmount, Time... givenTime) {
+    public Double whatIf(Double doseAmount, LocalTime... givenTime) {
         return null;
     }
 
@@ -44,7 +41,7 @@ public class Dose implements DoseInterface {
     }
 
     @Override
-    public Time whenToDose() {
+    public LocalTime whenToDose() {
         return null;
     }
 
@@ -55,7 +52,7 @@ public class Dose implements DoseInterface {
 
     @Override
     public void parseMedicine(Medicine medicine) {
-
+        this.medicine = medicine;
     }
 
 }
