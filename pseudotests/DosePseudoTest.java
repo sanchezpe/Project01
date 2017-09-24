@@ -11,9 +11,8 @@ testDoseTakenTime:
 
         if not input <= 0, assert dose.time.equals(input);
 
-testDoseDsiplayCurrentConcentrationAmount:
-        assert doses.time.equals.time.now();
-
+testDoseDisplayCurrentConcentrationAmount:
+        if dose.time.equals  > dose.takentime && dose.time.equals < medicine.tmax, assert dose.concentration.lessThan.dose.amount
 
 testDoseDisplayConcentrationAmountGivenTime:
         input = an input integer from the user;
@@ -23,8 +22,12 @@ testDoseDisplayConcentrationAmountGivenTime:
 
 //Advanced
 dosePeakLevel:
+        if medicine.tmax != dose.time, assert dose.errors.contains("Indalid peak level");
+
+        if medicine.tmax == dose.time, assert dose.currentconcentrationamount.equals(doseamount);
 
 whenToDoseLevel:
+        assert dose.time.add(medicine.tmax)
 
 
 

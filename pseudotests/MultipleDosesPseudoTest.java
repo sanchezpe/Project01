@@ -28,5 +28,9 @@ testDosesLoadFromFile:
 
 //Advanced
 whatIfDose:
+        input = an input integer from the user;
+        if input.isEmpty || input2 <= 0, assert dose.errors.contains("Dose time invalid. Setting current time instead");
+        dose.time.now();
 
+        if not input <= 0, assert dose.time.equals(input);
 
