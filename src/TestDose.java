@@ -1,10 +1,10 @@
-public class Dose implements IDose {
+public class TestDose implements IDose {
     private int timeTake;
     private float amount;
 
     @Override
     public boolean areYouATestDose() {
-        return false;
+        return true;
     }
 
     @Override
