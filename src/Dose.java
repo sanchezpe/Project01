@@ -1,25 +1,42 @@
+import java.time.LocalTime;
+
 public class Dose implements IDose {
-    private int timeTake;
-    private float amount;
+    private LocalTime timeTake = LocalTime.now();
+    private double amount = 0;
+    private boolean isTestDose = false;
 
     @Override
-    public boolean areYouATestDose() {
-        return false;
+    public boolean isTestDose() {
+        return isTestDose;
     }
 
     @Override
-    public void createDose(int timeTake, float amount) {
+    public void createDose(LocalTime timeTake, double amount) {
         this.timeTake = timeTake;
-        this.amount = amount;
-    }
 
-    @Override
-    public String getDisplayVersion() {
-        return null;
+        if (amount >= 0) {
+            this.amount = amount;
+        }
     }
 
     @Override
     public double getAmount() {
         return amount;
+    }
+
+    @Override
+    public LocalTime getTimeTake() {
+        return timeTake;
+    }
+
+    @Override
+    public void setTestDose() {
+        this.isTestDose = true;
+    }
+
+    @Override
+    public String toString() {
+        return "Test Dose: " + this.isTestDose() + "   Time taken: " + this.getTimeTake()
+                + "   Amount: " + this.getAmount() + "\n";
     }
 }

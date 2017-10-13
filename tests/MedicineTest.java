@@ -1,56 +1,39 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class MedicineTest {
-
-    Medicine testMedicine;
-
-    @Before
-    public void setUp() throws Exception {
+class MedicineTest {
+    @BeforeEach
+    void setUp() {
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() {
     }
 
     @Test
-    public void testMedicineName() throws Exception {
-
-        testMedicine = new Medicine("", 0, 0);
-        assertTrue(testMedicine.getMedicineName().isEmpty());
-
-        testMedicine = new Medicine(null, 0, 0);
-        assertEquals(testMedicine.getMedicineName(), null);
-
-        testMedicine = new Medicine("Aspirin", 0, 0);
-        assertEquals(testMedicine.getMedicineName(), "Aspirin");
-    }
-
-
-    @Test
-    public void testMedicineTmax() throws Exception {
-
-        testMedicine = new Medicine("", 0, 0);
-        assertTrue(testMedicine.getMedicineTMax() <= 0);
-
-        testMedicine = new Medicine("", 8, 0);
-        assertTrue(testMedicine.getMedicineTMax() > 0);
-        assertEquals(testMedicine.getMedicineTMax(), 8);
-
+    void createMedicine() {
     }
 
     @Test
-    public void testMedicineHalfLife() throws Exception {
-
-        testMedicine = new Medicine("", 0, 0);
-        assertTrue(testMedicine.getHalfLife() <= 0);
-
-        testMedicine = new Medicine("", 0, 16);
-        assertTrue(testMedicine.getHalfLife() > 0);
-        assertEquals(testMedicine.getHalfLife(), 16);
+    void addDose() {
     }
 
+    @Test
+    void removeDose() {
+    }
+
+    @Test
+    void removeTestDoses() {
+    }
+
+    @Test
+    void getConcentrationAtTime() {
+    }
+
+    @Test
+    void getDoses() {
+    }
 }

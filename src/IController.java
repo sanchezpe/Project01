@@ -8,7 +8,7 @@ public interface IController {
     /**
      * @param dose
      */
-    void printSpecificDose(IDose dose);
+    //void printSpecificDose(IDose dose);
 
     /**
      * @param timeInSeconds
@@ -20,7 +20,7 @@ public interface IController {
      * @param userAnnoyance
      * @return
      */
-    IAction whatTheHellDoesTheUserWant(String userAnnoyance);
+    //IAction whatTheHellDoesTheUserWant(String userAnnoyance);
 
 }
 

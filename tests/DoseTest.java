@@ -1,45 +1,74 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.time.LocalTime;
 
-public class DoseTest {
-    @Before
-    public void setUp() throws Exception {
+import static org.junit.jupiter.api.Assertions.*;
+
+class DoseTest {
+
+    Dose d = new Dose();
+
+    @BeforeEach
+    void setUp() {
+        d.createDose(LocalTime.now(), 1);
     }
 
-    @After
-    public void tearDown() throws Exception {
-    }
-
-    @Test
-    public void getDoseAmount() throws Exception {
-
-    }
-
-    @Test
-    public void getDoseTakenTime() throws Exception {
-    }
-
-    @Test
-    public void getConcentrationAmount() throws Exception {
+    @AfterEach
+    void tearDown() {
+        d = new Dose();
     }
 
     @Test
-    public void getConcentrationCurrentAmount() throws Exception {
+    void isTestDose() {
+        assertFalse(d.isTestDose());
+
     }
 
     @Test
-    public void whatIf() throws Exception {
+    void createDose() {
+        LocalTime mytime = LocalTime.now();
+        d.createDose(mytime, 20.3);
+        assertTrue(d.getAmount() == 20.3);
+        assertTrue(d.getTimeTake() == mytime);
+        System.out.print(d.toString());
+
+        LocalTime othertime = LocalTime.of(21, 53);
+        d.createDose(othertime, 2);
+        assertTrue(d.getAmount() == 2);
+        assertTrue(d.getTimeTake() == othertime);
+        System.out.print(d.toString());
     }
 
     @Test
-    public void getConcentrationPeak() throws Exception {
+    void getAmount() {
+        assertTrue(d.getAmount() == 1);
+
+        d.createDose(LocalTime.now(), 2.5);
+        assertTrue(d.getAmount() == 2.5);
+
+        tearDown();
+        d.createDose(LocalTime.of(2,30), -5);
+        assertEquals(d.getAmount(), 0);
+
     }
 
     @Test
-    public void whenToDose() throws Exception {
+    void getTimeTake() {
+        LocalTime time = LocalTime.of(11, 00);
+        d.createDose(time, 4.2);
+        assertEquals(d.getTimeTake(), time);
+    }
+
+    @Test
+    void setTestDose() {
+        assertFalse(d.isTestDose());
+        System.out.print(d.toString());
+
+        d.setTestDose();
+        assertTrue(d.isTestDose());
+        System.out.print(d.toString());
     }
 
 }

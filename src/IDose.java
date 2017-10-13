@@ -4,31 +4,37 @@ import java.time.LocalTime;
 public interface IDose {
 
     /**
+     * Identifies dose type.
      *
-     * @return
+     * @return True = TestDose (what-if dose); False = Dose (actual dose);
      */
-    boolean areYouATestDose();
+    boolean isTestDose();
 
     /**
+     * Creates a Dose object.
      *
-     * @param timeTake
-     * @param amount
+     * @param timeTake Time when the dose is taken by patient.
+     * @param amount   Concentration amount of the dose taken by patient.
      */
-    void createDose(int timeTake, float amount);
+    void createDose(LocalTime timeTake, double amount);
+
 
     /**
+     * Time when the dose is taken by patient.
      *
-     * @param timeInSeconds
-     * @return
+     * @return LocalTime Time of Dose.
      */
-    //float getConcentrationAtTime(int timeInSeconds);
+    LocalTime getTimeTake();
 
     /**
+     * Concentration amount of the dose taken by patient.
      *
-     * @return
+     * @return Concentration amount of Dose.
      */
-    String getDisplayVersion();
-
-    //needed(?)
     double getAmount();
+
+    /**
+     * Sets dose to test dose. Used for the what-if feature of the program.
+     */
+    void setTestDose();
 }
