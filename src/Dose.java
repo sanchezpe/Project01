@@ -1,9 +1,17 @@
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Dose implements IDose {
+public class Dose implements IDose, Serializable {
     private LocalTime timeTake = LocalTime.now();
     private double amount = 0;
     private boolean isTestDose = false;
+
+    public Dose() {
+    }
+
+    public Dose(LocalTime timeTake, double amount) {
+        createDose(timeTake, amount);
+    }
 
     @Override
     public boolean isTestDose() {

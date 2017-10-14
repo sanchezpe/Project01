@@ -12,7 +12,7 @@ class MedicineTest {
 
     @BeforeEach
     void setUp() {
-        m.createMedicine("Aspirin", LocalTime.of(9, 30), 1.5);
+        m.createMedicine("Aspirin", LocalTime.of(9, 30), LocalTime.of(0, 30));
     }
 
     @AfterEach
@@ -24,7 +24,7 @@ class MedicineTest {
     @Test
     void createMedicine() {
 
-        m.createMedicine("Oxycodone", LocalTime.of(8, 0), .5);
+        m.createMedicine("Oxycodone", LocalTime.of(8, 0), LocalTime.of(1, 30));
         assertTrue(m.getDoses().isEmpty());
         System.out.println(m.toString());
     }
@@ -112,7 +112,7 @@ class MedicineTest {
 
         System.out.println(m.getConcentrationAtTime(LocalTime.of(8, 0)));
 
-        System.out.println(Math.pow(.5, ((double)  28800 / 1.5)));
+        //System.out.println(Math.pow(.5, ((double)  28800 / 1.5)));
     }
 
     @Test

@@ -6,41 +6,27 @@ import java.util.ArrayList;
 public class Medicine implements IMedicine, Serializable {
     private String name;
     private LocalTime tmax;
-    private double halfLife;
+    private LocalTime halfLife;
     private ArrayList<IDose> doses = new ArrayList<>();
 
+    public Medicine() {
+    }
+
+    public Medicine(String name, LocalTime tMax, LocalTime halfLife) {
+        createMedicine(name, tMax, halfLife);
+
+    }
+
     @Override
-    public void createMedicine(String name, LocalTime tMax, double halfLife) {
+    public void createMedicine(String name, LocalTime tMax, LocalTime halfLife) {
         this.name = name;
         this.tmax = tMax;
         this.halfLife = halfLife;
     }
 
     @Override
-    public void addDose(IDose dose) {
-        doses.add(dose);
-    }
-
-    @Override
-    public void removeDose(IDose dose) {
-        doses.remove(dose);
-    }
-
-    @Override
-    /*
-    DO NOT USE FOR loop if you plan to remove doses as you traverse.
-    Use an LIST ITERATOR to remove dose as you traverse the array.
-    Use a FOR loop to first collect doses AND then remove them.
-     */
-    public void removeTestDoses() {
-        //easiest way to remove array elements
-        getDoses().removeIf(IDose::isTestDose);
-    }
-
-    @Override
-    public double getConcentrationAtTime(LocalTime time) {
-
-        return getDoses().get(0).getAmount() * Math.pow(.5, ((double) time.toSecondOfDay() / halfLife));
+    public LocalTime getHalfLife() {
+        return halfLife;
     }
 
     @Override

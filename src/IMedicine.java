@@ -9,7 +9,7 @@ public interface IMedicine {
      * @param tMax     Time when medicine is at its peak concentration.
      * @param halfLife Time required for medicine to decrease by half.
      */
-    void createMedicine(String name, LocalTime tMax, double halfLife);
+    void createMedicine(String name, LocalTime tMax, LocalTime halfLife);
 
     /**
      * Corresponds to all existing doses. Includes type Dose and TestDose.
@@ -20,30 +20,9 @@ public interface IMedicine {
     ArrayList<IDose> getDoses();
 
     /**
-     * Adds a new dose. Added doses can be type Dose (actual dose) or TestDose (what-if dose)
+     * Half life time of the medicine.
      *
-     * @param dose Dose object.
+     * @return LocalTime. Return the half life time of the medicine
      */
-    void addDose(IDose dose);
-
-    /**
-     * Remove an specified dose.
-     *
-     * @param dose Dose object.
-     */
-    void removeDose(IDose dose);
-
-    /**
-     * Remove all doses of type TestDose.
-     */
-    void removeTestDoses();
-
-    /**
-     * Get the concentration amount at a specific time.
-     *
-     * @param time LocalTime object. Time in hours and minutes.
-     * @return Concentration amount at specific time.
-     */
-    double getConcentrationAtTime(LocalTime time);
-
+    LocalTime getHalfLife();
 }

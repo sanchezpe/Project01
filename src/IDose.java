@@ -18,7 +18,6 @@ public interface IDose {
      */
     void createDose(LocalTime timeTake, double amount);
 
-
     /**
      * Time when the dose is taken by patient.
      *

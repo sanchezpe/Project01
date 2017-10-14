@@ -1,26 +1,29 @@
-//main likely uses the class that implements IController to do the work
 public interface IController {
     /**
+     * Creates a Dose instance from user input.
      *
+     * @return IDose. A Dose created from user input
      */
-    void printAllDoses();
+    static IDose createDoseFromUserInput() {
+        return null;
+    }
 
     /**
-     * @param dose
+     * Starts the welcome screen of the program.
      */
-    //void printSpecificDose(IDose dose);
+    static void start() {
+    }
 
     /**
-     * @param timeInSeconds
-     * @return
+     * Starts the action menu of the program.
      */
-    IDose getDoseBasedOnTime(int timeInSeconds);
+    static void selectAction() {
+    }
 
     /**
-     * @param userAnnoyance
-     * @return
+     * Clears the text from the console.
      */
-    //IAction whatTheHellDoesTheUserWant(String userAnnoyance);
-
+    static void clear() {
+    }
 }
 
