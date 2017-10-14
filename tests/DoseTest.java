@@ -49,7 +49,7 @@ class DoseTest {
         assertTrue(d.getAmount() == 2.5);
 
         tearDown();
-        d.createDose(LocalTime.of(2,30), -5);
+        d.createDose(LocalTime.of(2, 30), -5);
         assertEquals(d.getAmount(), 0);
 
     }

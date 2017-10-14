@@ -17,6 +17,7 @@ public class Dose implements IDose {
         if (amount >= 0) {
             this.amount = amount;
         }
+        this.isTestDose = false;
     }
 
     @Override
@@ -37,6 +38,6 @@ public class Dose implements IDose {
     @Override
     public String toString() {
         return "Test Dose: " + this.isTestDose() + "   Time taken: " + this.getTimeTake()
-                + "   Amount: " + this.getAmount() + "\n";
+                + "   Amount: " + this.getAmount();
     }
 }
