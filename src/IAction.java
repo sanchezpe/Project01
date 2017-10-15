@@ -1,5 +1,4 @@
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public interface IAction {
     /**
@@ -19,7 +18,7 @@ public interface IAction {
      *
      * @param dose Dose object.
      */
-    void removeDose(IDose dose);
+    //void removeDose(IDose dose);
 
     /**
      * Delete all doses from the dosages array.
@@ -54,7 +53,7 @@ public interface IAction {
     /**
      * @return
      */
-    IMedicine getMedicine();
+    //IMedicine getMedicine();
 
     /**
      * Print the name, tmax, and halfLife of the medicine using Medicine toString() method.
@@ -67,12 +66,12 @@ public interface IAction {
      * @param time Specified time to calculate concentration amount.
      * @return ArrayList with the current concentration amount.
      */
-    ArrayList<Double> getCurrentConcentration(LocalTime time);
+    //ArrayList<Double> getCurrentConcentration(LocalTime time);
 
     /**
      * @param concentrations
      */
-    void printCurrentConcentration(ArrayList<Double> concentrations);
+    //void printCurrentConcentration(ArrayList<Double> concentrations);
 
     /**
      * @param time
@@ -81,21 +80,15 @@ public interface IAction {
 
     //void removeTestDoses();
 
-    /**
-     * @param useTests
-     * @return
-     */
-    ArrayList<Double> getPeakConcentration(Boolean useTests);
 
-    /**
-     * @param useTests
-     */
-    void printPeakConcentration(Boolean useTests);
+    //ArrayList<Double> getPeakConcentrationTime(Boolean includeTestDoses);
+
+    //void printPeakConcentration(Boolean includeTestDoses);
 
     /**
      * @param amountDesired
      * @return
      */
-    ArrayList<Double> whenToDose(Double amountDesired);
+    //ArrayList<Double> whenToDose(Double amountDesired);
 
 }

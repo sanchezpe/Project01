@@ -40,7 +40,7 @@ class ActionTest {
         a.addDose(new Dose(LocalTime.of(6, 30), 2.3));
         a.printDoses();
 
-        a.removeDose(new Dose(LocalTime.of(6, 30), 2.3));
+        //a.removeDose(new Dose(LocalTime.of(6, 30), 2.3));
         a.printDoses();
 
     }
@@ -69,7 +69,7 @@ class ActionTest {
     @Test
     void printCurrentConcentration() {
         a.addDose(new Dose(LocalTime.of(6, 30), 2.3));
-        a.printCurrentConcentration(a.getCurrentConcentration(LocalTime.of(8, 45)));
+        //a.printCurrentConcentration(a.getCurrentConcentration(LocalTime.of(8, 45)));
     }
 
     @Test

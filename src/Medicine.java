@@ -27,6 +27,11 @@ public class Medicine implements IMedicine, Serializable {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public LocalTime getHalfLife() {
         return halfLife;
     }
@@ -34,6 +39,11 @@ public class Medicine implements IMedicine, Serializable {
     @Override
     public ArrayList<IDose> getDoses() {
         return doses;
+    }
+
+    @Override
+    public LocalTime getTmax() {
+        return tmax;
     }
 
     @Override

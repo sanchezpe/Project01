@@ -16,10 +16,6 @@ public class Dose implements IDose, Serializable {
         createDose(timeTake, amount);
     }
 
-    public Dose(double amount) {
-        this.amount = amount;
-    }
-
     @Override
     public boolean isTestDose() {
         return isTestDose;
@@ -27,11 +23,10 @@ public class Dose implements IDose, Serializable {
 
     @Override
     public void createDose(LocalTime timeTake, double amount) {
-        this.timeTake = timeTake;
-
         if (amount > 0) {
-            this.amount = amount;
+            this.timeTake = timeTake;
         }
+        this.amount = amount;
         this.isTestDose = false;
     }
 

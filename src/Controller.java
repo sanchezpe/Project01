@@ -7,68 +7,91 @@ public class Controller implements IController {
     static Scanner userInput = new Scanner(System.in);
     static Action action = new Action();
 
-    static LocalTime createLocalTimeFromUserInput(int hour, int minute) {
-        //checks if hour and minute is within valid range
-        if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
-            return LocalTime.of(hour, minute);
-        }
+    private static LocalTime createLocalTime() {
+        int hour;
+        int minute;
 
-        //if range is incorrect, use local time instead
-        return LocalTime.now();
-    }
-
-    static LocalTime createLocalTimeFromUserInput() {
         System.out.print("Enter hour: ");
-        int hour = userInput.nextInt();
+        checkIfInteger();
+        hour = userInput.nextInt();
 
         System.out.print("Enter minute: ");
-        int minute = userInput.nextInt();
+        checkIfInteger();
+        minute = userInput.nextInt();
 
         //checks if hour and minute is within valid range
-        if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
+        if ((hour >= 0 && hour < 24) && (minute >= 0 && minute < 60)) {
             return LocalTime.of(hour, minute);
         }
 
         //if range is incorrect, use local time instead
+        System.out.println("Invalid time. Using current time instead.");
+        pause();
         return LocalTime.now();
     }
 
-    static IDose createDoseFromUserInput(int hour, int minute, double amount) {
-        /*System.out.print("Enter a dose hour: ");
-        int doseHour = userInput.nextInt();
+    private static void createMedicine() {
+        System.out.print("Enter medicine name: ");
+        String name = userInput.next();
 
-        System.out.print("Enter a dose minute: ");
-        int doseMinute = userInput.nextInt();
+        System.out.println("Set up medicine TMax");
+        LocalTime tMax = createLocalTime();
 
-        System.out.print("Enter a dose amount: ");
-        double doseAmount = userInput.nextDouble();*/
+        System.out.println("Setup medicine half life");
+        LocalTime halfLife = createLocalTime();
 
-        if (amount > 0) {
-            return new Dose(LocalTime.of(hour, minute), amount);
-        }
-
-        return new Dose(LocalTime.of(hour, minute), 1);
-
+        action.newFile(name, tMax, halfLife);
     }
 
-    static IDose createDoseFromUserInput() {
-        System.out.print("Enter dose hour: ");
-        int hour = userInput.nextInt();
-
-        System.out.print("Enter dose minute: ");
-        int minute = userInput.nextInt();
+    private static IDose createDose() {
+        System.out.println("Create a dose");
+        LocalTime takeTime = createLocalTime();
 
         System.out.print("Enter dose amount: ");
+        checkIfValidNumber();
+
         double amount = userInput.nextDouble();
+        return new Dose(takeTime, amount);
 
-        if (amount > 0) {
-            return new Dose(LocalTime.of(hour, minute), amount);
-        }
-
-        return new Dose(LocalTime.of(hour, minute), 1);
     }
 
-    static void start() {
+    private static void removeDose() {
+        System.out.print("Enter dose index");
+        if (userInput.nextInt() < action.getMedicine().getDoses().size()) {
+            action.removeDose(userInput.nextInt());
+            clear();
+        }
+        System.out.println("Invalid index");
+    }
+
+    private static void checkIfInteger() {
+        if (!userInput.hasNextInt()) {
+            System.out.println("Error: Input is not an integer number");
+            System.exit(1);
+        }
+    }
+
+    private static void checkIfValidNumber() {
+        if (!(userInput.hasNextInt() || userInput.hasNextDouble())) {
+            System.out.println("Error: Input is not a valid number");
+            System.exit(1);
+        }
+    }
+
+
+    private static void clear() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
+
+    private static void pause() {
+        System.out.println("Press \"ENTER\" to continue...");
+        userInput.nextLine();
+        userInput.nextLine();
+    }
+
+    private static void start() {
         System.out.println("Welcome! \n");
         System.out.println("What do you want to do?");
         System.out.println("1. Create new file");
@@ -77,23 +100,7 @@ public class Controller implements IController {
 
         switch (userInput.next()) {
             case "1":
-                System.out.print("Enter medicine name: ");
-                String name = userInput.next();
-
-                System.out.print("Enter TMax hours: ");
-                int tmaxHour = userInput.nextInt();
-                System.out.print("Enter TMax minutes: ");
-                int tmaxMinute = userInput.nextInt();
-                //LocalTime tMax = LocalTime.of(tmaxHour, tmaxMinute);
-
-                System.out.print("Enter half life hours: ");
-                int halfLifeHour = userInput.nextInt();
-                System.out.print("Enter half life minutes: ");
-                int halfLifeMinute = userInput.nextInt();
-                //LocalTime halfLife = LocalTime.of(halfLifeHour, halfLifeMinute);
-                action.newFile(name,
-                        createLocalTimeFromUserInput(tmaxHour, tmaxMinute),
-                        createLocalTimeFromUserInput(halfLifeHour, halfLifeMinute));
+                createMedicine();
                 clear();
                 break;
             case "2":
@@ -113,11 +120,8 @@ public class Controller implements IController {
         }
     }
 
-    static void selectAction() {
+    private static void selectAction() {
         do {
-            /*int doseHour;
-            int doseMinute;
-            Double doseAmount;*/
             IDose d;
 
             action.printMedicine();
@@ -129,12 +133,11 @@ public class Controller implements IController {
             System.out.println("5. Display current concentration amount");
             System.out.println("6. Display concentration amount at a specific time");
             System.out.println("7. Save file and exit");
-
             System.out.println("\nAdvanced Features");
-            System.out.println("8. Add test dose");
-            //System.out.println(. Remove all test doses");
-            System.out.println("9. Highest peak");
+            System.out.println("8. Add a test dose");
+            System.out.println("9. Time of highest peak");
             System.out.println("10. When to dose");
+            System.out.println("11. Remove all test doses");
             System.out.print("Enter a number: ");
 
             switch (userInput.next()) {
@@ -145,15 +148,10 @@ public class Controller implements IController {
                     clear();
                     break;
                 case "2":
-                    action.addDose(createDoseFromUserInput());
+                    action.addDose(createDose());
                     break;
                 case "3":
-                    System.out.print("Enter dose index");
-                    if (userInput.nextInt() < action.getMedicine().getDoses().size()) {
-                        action.removeDose(userInput.nextInt());
-                        clear();
-                    }
-                    System.out.println("Invalid index");
+                    removeDose();
                     pause();
                     clear();
                     break;
@@ -162,15 +160,13 @@ public class Controller implements IController {
                     break;
                 case "5":
                     clear();
-                    //action.printCurrentConcentration(action.getCurrentConcentration(LocalTime.now()));
                     action.printCurrentConcentration(LocalTime.now());
                     pause();
                     clear();
                     break;
                 case "6":
                     clear();
-                    //action.printCurrentConcentration(action.getCurrentConcentration(createLocalTimeFromUserInput()));
-                    action.printCurrentConcentration(createLocalTimeFromUserInput());
+                    action.printCurrentConcentration(createLocalTime());
                     pause();
                     clear();
                     break;
@@ -182,31 +178,52 @@ public class Controller implements IController {
 
                 //Advanced features
                 case "8":
-                    d = createDoseFromUserInput();
+                    d = createDose();
                     d.setTestDose();
                     action.addDose(d);
+                    break;
+                case "9":
+                    System.out.println("1. Include test doses");
+                    System.out.println("2. Do NOT include test doses");
+                    System.out.print("Enter a number: ");
+
+                    switch (userInput.next()) {
+                        case "1":
+                            clear();
+                            action.printPeakConcentrationTime(true);
+                            pause();
+                            clear();
+                            break;
+                        case "2":
+                            clear();
+                            action.printPeakConcentrationTime(false);
+                            pause();
+                            clear();
+                            break;
+                        default:
+                            System.out.println("Invalid user input");
+                            break;
+                    }
+                    break;
+                case "10":
+                    System.out.print("Enter dose amount: ");
+                    checkIfValidNumber();
+
+                    action.printWhenToDose(userInput.nextDouble());
+                    break;
+                case "11":
+                    action.removeTestDoses();
                     break;
                 case "exit":
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid user input");
-                    System.exit(0);
+                    //System.exit(0);
+                    //return;
                     break;
             }
         } while (true);
-    }
-
-    static void clear() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println();
-        }
-    }
-
-    static void pause() {
-        System.out.println("Press \"ENTER\" to continue...");
-        userInput.nextLine();
-        userInput.nextLine();
     }
 
     public static void main(String[] args) {

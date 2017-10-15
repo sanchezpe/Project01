@@ -19,10 +19,14 @@ public interface IMedicine {
      */
     ArrayList<IDose> getDoses();
 
+    String getName();
+
     /**
      * Half life time of the medicine.
      *
      * @return Return the half life time of the medicine
      */
     LocalTime getHalfLife();
+
+    LocalTime getTmax();
 }
