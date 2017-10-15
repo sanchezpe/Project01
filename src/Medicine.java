@@ -9,9 +9,11 @@ public class Medicine implements IMedicine, Serializable {
     private LocalTime halfLife;
     private ArrayList<IDose> doses = new ArrayList<>();
 
+    //default constructor
     public Medicine() {
     }
 
+    //parameterized constructor
     public Medicine(String name, LocalTime tMax, LocalTime halfLife) {
         createMedicine(name, tMax, halfLife);
 
@@ -32,12 +34,6 @@ public class Medicine implements IMedicine, Serializable {
     @Override
     public ArrayList<IDose> getDoses() {
         return doses;
-    }
-
-    public void printDoses() {
-        for (IDose dose : doses) {
-            System.out.print(dose + "\n");
-        }
     }
 
     @Override

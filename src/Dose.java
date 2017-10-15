@@ -1,16 +1,23 @@
 import java.io.Serializable;
 import java.time.LocalTime;
 
+//Serializable eases the process of saving file
 public class Dose implements IDose, Serializable {
     private LocalTime timeTake = LocalTime.now();
-    private double amount = 0;
+    private double amount = 1;
     private boolean isTestDose = false;
 
+    //default constructor
     public Dose() {
     }
 
+    //parameterized constructor
     public Dose(LocalTime timeTake, double amount) {
         createDose(timeTake, amount);
+    }
+
+    public Dose(double amount) {
+        this.amount = amount;
     }
 
     @Override
@@ -22,7 +29,7 @@ public class Dose implements IDose, Serializable {
     public void createDose(LocalTime timeTake, double amount) {
         this.timeTake = timeTake;
 
-        if (amount >= 0) {
+        if (amount > 0) {
             this.amount = amount;
         }
         this.isTestDose = false;
@@ -45,7 +52,7 @@ public class Dose implements IDose, Serializable {
 
     @Override
     public String toString() {
-        return "Test Dose: " + this.isTestDose() + "   Time taken: " + this.getTimeTake()
+        return "TestDose: " + this.isTestDose() + "   Time taken: " + this.getTimeTake()
                 + "   Amount: " + this.getAmount();
     }
 }

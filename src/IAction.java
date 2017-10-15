@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public interface IAction {
     /**
@@ -51,17 +52,50 @@ public interface IAction {
     void newFile(String name, LocalTime tMax, LocalTime halfLife);
 
     /**
+     * @return
+     */
+    IMedicine getMedicine();
+
+    /**
      * Print the name, tmax, and halfLife of the medicine using Medicine toString() method.
      */
     void printMedicine();
 
+    /**
+     * Calculate concentration amount at an specified time.
+     *
+     * @param time Specified time to calculate concentration amount.
+     * @return ArrayList with the current concentration amount.
+     */
+    ArrayList<Double> getCurrentConcentration(LocalTime time);
 
     /**
-     * Print the concentration amount of all doses at a specified time.
+     * @param concentrations
      */
-    void currentConcentration(LocalTime time);
+    void printCurrentConcentration(ArrayList<Double> concentrations);
+
+    /**
+     * @param time
+     */
+    void printCurrentConcentration(LocalTime time);
 
     //void removeTestDoses();
 
-    //double getConcentrationAtTime(LocalTime time);
+    /**
+     * @param useTests
+     * @return
+     */
+    ArrayList<Double> getPeakConcentration(Boolean useTests);
+
+    /**
+     * @param useTests
+     */
+    void printPeakConcentration(Boolean useTests);
+
+    /**
+     * @param amountDesired
+     * @return
+     */
+    ArrayList<Double> whenToDose(Double amountDesired);
+
 }

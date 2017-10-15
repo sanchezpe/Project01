@@ -32,13 +32,13 @@ class DoseTest {
         d.createDose(mytime, 20.3);
         assertTrue(d.getAmount() == 20.3);
         assertTrue(d.getTimeTake() == mytime);
-        System.out.print(d.toString());
+        System.out.println(d.toString());
 
         LocalTime othertime = LocalTime.of(21, 53);
         d.createDose(othertime, 2);
         assertTrue(d.getAmount() == 2);
         assertTrue(d.getTimeTake() == othertime);
-        System.out.print(d.toString());
+        System.out.println(d.toString());
     }
 
     @Test
@@ -64,11 +64,11 @@ class DoseTest {
     @Test
     void setTestDose() {
         assertFalse(d.isTestDose());
-        System.out.print(d.toString());
+        System.out.println(d.toString());
 
         d.setTestDose();
         assertTrue(d.isTestDose());
-        System.out.print(d.toString());
+        System.out.println(d.toString());
     }
 
 }
