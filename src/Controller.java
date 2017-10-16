@@ -13,7 +13,7 @@ public class Controller {
      *
      * @return LocalTime instance.
      */
-    private static LocalTime createLocalTime() {
+    public static LocalTime createLocalTime() {
         int hour;
         int minute;
 
@@ -39,7 +39,7 @@ public class Controller {
     /**
      * Creates a Medicine instance from user input.
      */
-    private static void createMedicine() {
+    public static void createMedicine() {
         System.out.print("Enter medicine name: ");
         String name = userInput.next();
 
@@ -57,7 +57,7 @@ public class Controller {
      *
      * @return A Dose instance
      */
-    private static IDose createDose() {
+    public static IDose createDose() {
         System.out.println("Create a dose");
         LocalTime takeTime = createLocalTime();
 
@@ -72,10 +72,11 @@ public class Controller {
     /**
      * Removes dose using an index selected by the user.
      */
-    private static void removeDose() {
-        System.out.print("Enter dose index");
-        if (userInput.nextInt() < action.getMedicine().getDoses().size()) {
-            action.removeDose(userInput.nextInt());
+    public static void removeDose() {
+        System.out.print("Enter dose index: ");
+        int index = userInput.nextInt();
+        if (index < action.getMedicine().getDoses().size()) {
+            action.removeDose(index);
         }
         System.out.println("Invalid index");
     }
@@ -84,7 +85,7 @@ public class Controller {
      * Validates if user input is an integer only.
      * If input is not an integer, the program stops.
      */
-    private static void checkIfInteger() {
+    public static void checkIfInteger() {
         if (!userInput.hasNextInt()) {
             System.out.println("Error: Input is not an integer number");
             System.exit(1);
@@ -95,7 +96,7 @@ public class Controller {
      * Validates if user input is a number, either Integer or Double.
      * If input is not an number, the program stops.
      */
-    private static void checkIfValidNumber() {
+    public static void checkIfValidNumber() {
         if (!(userInput.hasNextInt() || userInput.hasNextDouble())) {
             System.out.println("Error: Input is not a valid number");
             System.exit(1);
@@ -114,7 +115,7 @@ public class Controller {
     /**
      * Pause scrolling fot the console screen until user hits the Enter key.
      */
-    private static void pause() {
+    public static void pause() {
         System.out.println("Press \"ENTER\" to continue...");
         userInput.nextLine();
         userInput.nextLine();
@@ -157,7 +158,7 @@ public class Controller {
      * Display the list of actions that can be performed by the application.
      * The user must enter the corresponding number to execute the action.
      */
-    private static void selectAction() {
+    public static void selectAction() {
         //Executes this screen until the user exit the program.
         do {
             IDose d;

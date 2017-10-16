@@ -7,12 +7,16 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionTest {
-    Dose d = new Dose();
     Action a = new Action();
 
     @BeforeEach
     void setUp() {
-        a.newFile("Test medicine", LocalTime.of(16, 0), LocalTime.of(22, 0));
+        a.newFile("TestMedicine", LocalTime.of(8, 30), LocalTime.of(3, 0));
+        a.addDose(new Dose(LocalTime.of(9, 0), 3.8));
+
+        Dose d = new Dose(LocalTime.of(6, 6), 33.8);
+        d.setTestDose();
+        a.addDose(d);
     }
 
     @AfterEach
@@ -21,55 +25,70 @@ class ActionTest {
 
     @Test
     void printDoses() {
-        a.printDoses();
-
-        a.addDose(new Dose(LocalTime.now(), 2.3));
+        assertEquals(a.getMedicine().getDoses().size(), 2);
         a.printDoses();
     }
 
     @Test
     void addDose() {
-        a.printDoses();
-
-        a.addDose(new Dose(LocalTime.of(6, 30), 2.3));
+        a.addDose(new Dose(LocalTime.of(3, 20), 6.8));
+        assertEquals(a.getMedicine().getDoses().size(), 3);
         a.printDoses();
     }
 
     @Test
     void removeDose() {
-        a.addDose(new Dose(LocalTime.of(6, 30), 2.3));
-        a.printDoses();
+        a.removeDose(0);
 
-        //a.removeDose(new Dose(LocalTime.of(6, 30), 2.3));
-        a.printDoses();
-
+        //remaining dose changes from index 1 to 0
+        a.removeDose(0);
+        assertTrue(a.getMedicine().getDoses().isEmpty());
     }
 
     @Test
     void removeAllDoses() {
-        a.addDose(new Dose(LocalTime.of(6, 30), 2.3));
-        a.addDose(new Dose(LocalTime.of(5, 30), 2.3));
-        a.addDose(new Dose(LocalTime.of(4, 30), 2.3));
+        a.addDose(new Dose(LocalTime.of(3, 20), 6.1));
+        a.addDose(new Dose(LocalTime.of(4, 40), 7));
+        a.addDose(new Dose(LocalTime.of(5, 10), 6.3));
 
-        a.removeAllDoses();
         a.printDoses();
+        a.removeAllDoses();
+        assertTrue(a.getMedicine().getDoses().isEmpty());
     }
 
     @Test
     void getCurrentConcentration() {
-        a.addDose(new Dose(LocalTime.of(6, 30), 2.3));
-        a.getCurrentConcentration(LocalTime.of(8, 45)).get(0);
-
-        //System.out.println(a.getCurrentConcentration(LocalTime.of(8, 45)).get(0));
-
-        double d = a.getCurrentConcentration(LocalTime.of(8, 45)).get(0);
-        assertEquals(d, 1.7458221401896885);
+        a.addDose(new Dose(LocalTime.of(3, 20), 6.1));
+        a.addDose(new Dose(LocalTime.of(4, 40), 7));
+        a.addDose(new Dose(LocalTime.of(5, 10), 6.3));
+        System.out.println(a.getCurrentConcentration(LocalTime.now()));
     }
 
     @Test
     void printCurrentConcentration() {
-        a.addDose(new Dose(LocalTime.of(6, 30), 2.3));
-        //a.printCurrentConcentration(a.getCurrentConcentration(LocalTime.of(8, 45)));
+        a.printCurrentConcentration(LocalTime.of(3, 20));
+    }
+
+    @Test
+    void getPeakConcentrationTime() {
+        System.out.println(a.getPeakConcentrationTime(true));
+        System.out.println(a.getPeakConcentrationTime(false));
+    }
+
+    @Test
+    void printPeakConcentrationTime() {
+        a.printPeakConcentrationTime(true);
+        a.printPeakConcentrationTime(false);
+    }
+
+    @Test
+    void getWhenToDose() {
+        System.out.println(a.getWhenToDose(62.3));
+    }
+
+    @Test
+    void printWhenToDose() {
+        a.printWhenToDose(62.3);
     }
 
     @Test
@@ -85,7 +104,7 @@ class ActionTest {
 
     @Test
     void newFile() {
-        a.newFile("Other test medicine", LocalTime.now(), LocalTime.of(23, 59));
+        a.newFile("NewTestMedicine", LocalTime.of(2, 50), LocalTime.of(4, 2));
         a.printMedicine();
     }
 
@@ -93,4 +112,17 @@ class ActionTest {
     void printMedicine() {
         a.printMedicine();
     }
+
+    @Test
+    void removeTestDoses() {
+        a.removeTestDoses();
+        a.printDoses();
+        assertEquals(a.getMedicine().getDoses().size(), 1);
+    }
+
+    @Test
+    void getMedicine() {
+        a.getMedicine();
+    }
+
 }

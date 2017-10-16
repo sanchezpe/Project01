@@ -50,7 +50,7 @@ public class Action implements IAction {
     public void printCurrentConcentration(LocalTime time) {
         for (int i = 0; i < getCurrentConcentration(time).size(); i++) {
             System.out.println(medicine.getDoses().get(i) + "   Concentration at " + time
-                    + "is " + getCurrentConcentration(time).get(i));
+                    + " is " + getCurrentConcentration(time).get(i));
         }
     }
 
