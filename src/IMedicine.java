@@ -13,20 +13,29 @@ public interface IMedicine {
 
     /**
      * Corresponds to all existing doses. Includes type Dose and TestDose.
-     * This method can be used to list all doses since Dose implements toString() method.
      *
      * @return An array containing all doses.
      */
     ArrayList<IDose> getDoses();
 
+    /**
+     * Name of medicine.
+     *
+     * @return Return name of the medicine.
+     */
     String getName();
 
     /**
      * Half life time of the medicine.
      *
-     * @return Return the half life time of the medicine
+     * @return Return the half life time of the medicine.
      */
     LocalTime getHalfLife();
 
+    /**
+     * Tmax of medicine
+     *
+     * @return Return TMax of medicine.
+     */
     LocalTime getTmax();
 }

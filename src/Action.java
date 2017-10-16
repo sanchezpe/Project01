@@ -22,11 +22,7 @@ public class Action implements IAction {
         medicine.getDoses().add(dose);
     }
 
-    /*@Override
-    public void removeDose(IDose dose) {
-        medicine.getDoses().remove(dose);
-    }*/
-
+    @Override
     public void removeDose(int index) {
         medicine.getDoses().remove(index);
     }
@@ -36,25 +32,19 @@ public class Action implements IAction {
         medicine.getDoses().clear();
     }
 
+    @Override
     public ArrayList<Double> getCurrentConcentration(LocalTime time) {
         ArrayList<Double> currentConcentrations = new ArrayList<>();
 
         for (IDose dose : medicine.getDoses()) {
             //Formula to determine concentration at specified time
-
             //N(t)=N(o)*(1/2)^(time/halfLife)
-            double concentration = dose.getAmount() * Math.pow(.5, ((double) time.toSecondOfDay() / medicine.getHalfLife().toSecondOfDay()));
+            double concentration = dose.getAmount() *
+                    Math.pow(.5, ((double) time.toSecondOfDay() / medicine.getHalfLife().toSecondOfDay()));
             currentConcentrations.add(concentration);
         }
         return currentConcentrations;
     }
-
-    /*@Override
-    public void printCurrentConcentration(ArrayList<Double> concentrations) {
-        for (int i = 0; i < medicine.getDoses().size(); i++) {
-            System.out.println(medicine.getDoses().get(i) + "   Concentration: " + concentrations.get(i));
-        }
-    }*/
 
     @Override
     public void printCurrentConcentration(LocalTime time) {
@@ -64,12 +54,16 @@ public class Action implements IAction {
         }
     }
 
+    @Override
     public ArrayList<LocalTime> getPeakConcentrationTime(Boolean includeTestDoses) {
         ArrayList<LocalTime> peakConcentrations = new ArrayList<>();
+        //check if test doses are omitted
         if (!includeTestDoses) {
             for (IDose dose : medicine.getDoses()) {
+                //check whether dose is a test dose
                 if (!dose.isTestDose()) {
                     //formula
+                    //peak=doseTakeTime+medicinePeakTime
                     LocalTime peakConcentration = dose.getTimeTake().plusSeconds(medicine.getTmax().toSecondOfDay());
                     peakConcentrations.add(peakConcentration);
                 }
@@ -77,13 +71,13 @@ public class Action implements IAction {
             return peakConcentrations;
         }
         for (IDose dose : medicine.getDoses()) {
-            //formula
             LocalTime peakConcentration = dose.getTimeTake().plusSeconds(medicine.getTmax().toSecondOfDay());
             peakConcentrations.add(peakConcentration);
         }
         return peakConcentrations;
     }
 
+    @Override
     public void printPeakConcentrationTime(Boolean includeTestDoses) {
         for (int i = 0; i < getPeakConcentrationTime(includeTestDoses).size(); i++) {
             System.out.println(medicine.getDoses().get(i) + "   Peak Concentration: "
@@ -91,7 +85,8 @@ public class Action implements IAction {
         }
     }
 
-    public ArrayList<LocalTime> timeToDose(Double concentrationDesired) {
+    @Override
+    public ArrayList<LocalTime> getWhenToDose(Double concentrationDesired) {
         ArrayList<LocalTime> timesToDose = new ArrayList<>();
         for (IDose dose : medicine.getDoses()) {
             //formula
@@ -112,16 +107,17 @@ public class Action implements IAction {
         return timesToDose;
     }
 
+    @Override
     public void printWhenToDose(Double amountDesired) {
-        for (int i = 0; i < timeToDose(amountDesired).size(); i++) {
-            System.out.println(medicine.getDoses().get(i) + "    Dose at: " + timeToDose(amountDesired).get(i));
+        for (int i = 0; i < getWhenToDose(amountDesired).size(); i++) {
+            System.out.println(medicine.getDoses().get(i) + "    Dose at: " + getWhenToDose(amountDesired).get(i));
         }
     }
 
     @Override
     public void saveFile(String filename) {
         //Create ObjectOutputStream
-        ObjectOutputStream oos = null;
+        ObjectOutputStream oos;
 
         try {
             //Create a FileOutputStream with name filename
@@ -141,7 +137,7 @@ public class Action implements IAction {
     @Override
     public void loadFile(String filename) {
         //Creates ObjectInputStream
-        ObjectInputStream ois = null;
+        ObjectInputStream ois;
 
         try {
             //Create a ObjectInputStream from file filename
@@ -162,27 +158,18 @@ public class Action implements IAction {
         medicine = new Medicine(name, tMax, halfLife);
     }
 
-
-    /*@Override
-    public IMedicine getMedicine() {
-        return this.medicine;
-    }*/
-
     @Override
     public void printMedicine() {
         System.out.println(medicine);
     }
 
+    @Override
     public void removeTestDoses() {
         //easiest way to remove array elements
         medicine.getDoses().removeIf(IDose::isTestDose);
     }
 
-
-    /*public int getDoseArraySize() {
-        return medicine.getDoses().size();
-    }*/
-
+    @Override
     public IMedicine getMedicine() {
         return medicine;
     }
