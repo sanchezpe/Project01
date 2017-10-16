@@ -77,8 +77,9 @@ public class Controller {
         int index = userInput.nextInt();
         if (index < action.getMedicine().getDoses().size()) {
             action.removeDose(index);
+        }else{
+            System.out.println("Invalid index");
         }
-        System.out.println("Invalid index");
     }
 
     /**
