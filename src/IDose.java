@@ -1,40 +1,51 @@
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Optional;
 
 //TestDose implements IDose and a Dose implements IDose
 public interface IDose {
-
-    /**
-     * Identifies dose type.
-     *
-     * @return True = TestDose (what-if dose); False = Dose (actual dose);
-     */
-    boolean isTestDose();
-
     /**
      * Creates a Dose object.
      *
-     * @param timeTake Time when the dose is taken by patient.
-     * @param amount   Concentration amount of the dose taken by patient.
+     * @param dateTimeTakeDose Time when the dose is taken by patient.
+     * @param amount           Concentration amount of the dose taken by patient.
      */
-    void createDose(LocalTime timeTake, double amount);
+    void createDose(LocalDateTime dateTimeTakeDose, double amount);
 
     /**
      * Time when the dose is taken by patient.
      *
      * @return LocalTime Time of Dose.
      */
-    LocalTime getTimeTake();
+    LocalDateTime getDateTimeTakeDose();
 
     /**
      * Concentration amount of the dose taken by patient.
      *
      * @return Concentration amount of Dose.
      */
-    double getAmount();
+    Double getAmountDose();
 
     /**
-     * Sets dose to test dose. Used for the what-if feature of the program.
+     * Calculate dose concentration amount at a specified time.
+     *
+     * @param timeIn Time when dose is taken.
+     * @param timeMaxIn tMax of medicine.
+     * @param timeHalfLifeIn half life of medicine.
+     * @return Concentration amount of dose amount at a specified time.
+     */
+    Double getConcentrationAtTime(LocalDateTime timeIn, LocalTime timeMaxIn, LocalTime timeHalfLifeIn);
+
+    //Advanced Features
+
+    /**
+     * Identifies dose type.
+     *
+     * @return True = TestDose (what-if dose); False = Dose (actual dose);
+     */
+    boolean getIsTestDose();
+
+    /**
+     * Sets dose to test dose. Used for the what-if feature of the
      */
     void setTestDose();
 }

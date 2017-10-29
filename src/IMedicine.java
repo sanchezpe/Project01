@@ -1,15 +1,28 @@
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 public interface IMedicine {
     /**
-     * Creates a medicine object.
+     * Name of medicine.
      *
-     * @param name     Name of medicine.
-     * @param tMax     Time when medicine is at its peak concentration.
-     * @param halfLife Time required for medicine to decrease by half.
+     * @return Return name of the medicine.
      */
-    void createMedicine(String name, LocalTime tMax, LocalTime halfLife);
+    String getNameMedicine();
+
+    /**
+     * Half life time of the medicine.
+     *
+     * @return Return the half life time of the medicine.
+     */
+    LocalTime getTimeHalfLifeMedicine();
+
+    /**
+     * Tmax of medicine
+     *
+     * @return Return TMax of medicine.
+     */
+    LocalTime getTimeMaxMedicine();
 
     /**
      * Corresponds to all existing doses. Includes type Dose and TestDose.
@@ -19,23 +32,43 @@ public interface IMedicine {
     ArrayList<IDose> getDoses();
 
     /**
-     * Name of medicine.
+     * Creates a medicine object.
      *
-     * @return Return name of the medicine.
+     * @param nameMedicine         Name of medicine.
+     * @param timeMaxMedicine      Time when medicine is at its peak concentration.
+     * @param timeHalfLifeMedicine Time required for medicine to decrease by half.
      */
-    String getName();
+    void createMedicine(String nameMedicine, LocalTime timeMaxMedicine, LocalTime timeHalfLifeMedicine);
 
     /**
-     * Half life time of the medicine.
+     * Calculate the total concentration amount of the medicine (sum of all doses amount )at a specific dateTime.
      *
-     * @return Return the half life time of the medicine.
+     * @param dateTime specified dateTame
+     * @return Concentration amount of dose at a specified time.
      */
-    LocalTime getHalfLife();
+    Double getConcentrationsAtTime(LocalDateTime dateTime);
 
     /**
-     * Tmax of medicine
+     * Create an IDose Object
      *
-     * @return Return TMax of medicine.
+     * @param dose IDose Object
      */
-    LocalTime getTmax();
+    void addDose(IDose dose);
+
+    /**
+     * Removes all doses from the doses array in the medicine
+     */
+    void removeAllDoses();
+
+    /**
+     * Remove a dose by its index.
+     *
+     * @param index index of dose
+     */
+    void removeDose(int index);
+
+    /**
+     * Remove all test doses from the doses array
+     */
+    void removeTestDoses();
 }

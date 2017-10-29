@@ -2,17 +2,22 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoseTest {
-
-    Dose d = new Dose();
+    private Dose d = new Dose();
+    private ZoneOffset timezone = ZoneOffset.of("-05:00");
+    private LocalTime timeMax = LocalTime.of(1, 0);
+    private LocalTime timeHalfLife = LocalTime.of(2, 0);
 
     @BeforeEach
     void setUp() {
-        d.createDose(LocalTime.now(), 1);
+        LocalDateTime dateTimeTake = LocalDateTime.parse("2017-10-29T12:00");
+        d.createDose(dateTimeTake, 20);
     }
 
     @AfterEach
@@ -22,53 +27,77 @@ class DoseTest {
 
     @Test
     void isTestDose() {
-        assertFalse(d.isTestDose());
-
+        assertFalse(d.getIsTestDose());
     }
 
     @Test
     void createDose() {
-        LocalTime mytime = LocalTime.now();
-        d.createDose(mytime, 20.3);
-        assertTrue(d.getAmount() == 20.3);
-        assertTrue(d.getTimeTake() == mytime);
-        System.out.println(d.toString());
+        d.createDose(LocalDateTime.parse("2099-12-31T23:59"), 50);
 
-        LocalTime othertime = LocalTime.of(21, 53);
-        d.createDose(othertime, 2);
-        assertTrue(d.getAmount() == 2);
-        assertTrue(d.getTimeTake() == othertime);
-        System.out.println(d.toString());
+        System.out.println(d + "\n");
+        assertEquals(d.getDateTimeTakeDose().toString(), "2099-12-31T23:59");
+        assertEquals(d.getAmountDose(), (Double) 50.0);
     }
 
     @Test
-    void getAmount() {
-        assertTrue(d.getAmount() == 1);
-
-        d.createDose(LocalTime.now(), 2.5);
-        assertTrue(d.getAmount() == 2.5);
-
-        tearDown();
-        d.createDose(LocalTime.of(2, 30), -5);
-        assertEquals(d.getAmount(), 0);
-
+    void getAmountDose() {
+        assertEquals(d.getAmountDose(), (Double) 20.0);
     }
 
     @Test
-    void getTimeTake() {
-        LocalTime time = LocalTime.of(11, 00);
-        d.createDose(time, 4.2);
-        assertEquals(d.getTimeTake(), time);
+    void getTimeTakeDose() {
+        assertEquals(d.getDateTimeTakeDose().toString(), "2017-10-29T12:00");
+
     }
 
     @Test
     void setTestDose() {
-        assertFalse(d.isTestDose());
-        System.out.println(d.toString());
-
         d.setTestDose();
-        assertTrue(d.isTestDose());
-        System.out.println(d.toString());
+        assertTrue(d.getIsTestDose());
     }
 
+    @Test
+    void getConcentrationAtTime() {
+
+        LocalDateTime localDateTime = LocalDateTime.parse("2017-10-29T12:00");
+        Double amountDose = d.getConcentrationAtTime(localDateTime, timeMax, timeHalfLife);
+        /*System.out.println(amountDose);
+        System.out.println(localDateTime.toEpochSecond(timezone));
+        System.out.println(timeMax.toSecondOfDay());
+        System.out.println();*/
+        assertEquals(amountDose, (Double) 0.0);
+
+        localDateTime = LocalDateTime.parse("2017-10-29T11:30");
+        amountDose = d.getConcentrationAtTime(localDateTime, timeMax, timeHalfLife);
+        /*System.out.println(amountDose);
+        System.out.println(localDateTime.toEpochSecond(timezone));
+        System.out.println(timeMax.toSecondOfDay());
+        System.out.println();*/
+        assertEquals(amountDose, (Double) 0.0);
+
+        localDateTime = LocalDateTime.parse("2017-10-29T13:00");
+        amountDose = d.getConcentrationAtTime(localDateTime, timeMax, timeHalfLife);
+        /*System.out.println(amountDose);
+        System.out.println(localDateTime.toEpochSecond(timezone));
+        System.out.println(timeMax.toSecondOfDay());
+        System.out.println();*/
+        assertEquals(amountDose, (Double) 20.0);
+
+        localDateTime = LocalDateTime.parse("2017-10-29T12:15");
+        amountDose = d.getConcentrationAtTime(localDateTime, timeMax, timeHalfLife);
+        /*System.out.println(amountDose);
+        System.out.println(localDateTime.toEpochSecond(timezone));
+        System.out.println(timeMax.toSecondOfDay());
+        System.out.println();*/
+        assertEquals(amountDose, (Double) 5.0);
+
+        localDateTime = LocalDateTime.parse("2017-10-29T15:00");
+        amountDose = d.getConcentrationAtTime(localDateTime, timeMax, timeHalfLife);
+        /*System.out.println(amountDose);
+        System.out.println(localDateTime.toEpochSecond(timezone));
+        System.out.println(d.getDateTimeTakeDose().toEpochSecond(timezone));
+        System.out.println(timeHalfLife.toSecondOfDay());
+        System.out.println();*/
+        assertEquals(amountDose, (Double) 10.0);
+    }
 }
