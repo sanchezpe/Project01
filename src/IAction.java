@@ -1,7 +1,14 @@
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public interface IAction {
+    /**
+     * Retrieves the Medicine instance.
+     *
+     * @return IMedicine.Medicine instance
+     */
+    IMedicine getMedicine();
+
     /**
      * Prints all doses from Medicine's Dose array.
      */
@@ -15,9 +22,9 @@ public interface IAction {
     void addDose(IDose dose);
 
     /**
-     * Removes a dose from the dose from the doses array.
+     * Remove a dose by its index.
      *
-     * @param index Index of the array to be erased
+     * @param index index of dose
      */
     void removeDose(int index);
 
@@ -27,40 +34,16 @@ public interface IAction {
     void removeAllDoses();
 
     /**
-     * Time when the concentration is at its peak.
-     * It allows the user to choose if test doses will be displayed or not.
+     * Calculate the total concentration amount of the medicine (sum of all doses amount )at a specific dateTime.
      *
-     * @param includeTestDoses Determines whether test doses will be displayed.
-     * @return ArrayList containing peak concentration peak values of each dose.
+     * @param localDateTime specified dateTime.
+     * @return Concentration amount at specified time.
      */
-    ArrayList<LocalTime> getPeakConcentrationTime(Boolean includeTestDoses);
-
-    /**
-     * Print concentration peaks. Includes dose information and its concentration peak.
-     *
-     * @param includeTestDoses Determines whether test doses will be displayed.
-     */
-    void printPeakConcentrationTime(Boolean includeTestDoses);
-
-    /**
-     * Determines time when the patient should take next dose.
-     *
-     * @param concentrationDesired Dose amount desired sought.
-     * @return Time when the patient have to take next dose.
-     */
-    ArrayList<LocalTime> getWhenToDose(Double concentrationDesired);
-
-    /**
-     * Prints when the patient should take next dose.
-     * Includes dose information and time to take next dose.
-     *
-     * @param amountDesired Dose amount desired sought.
-     */
-    void printWhenToDose(Double amountDesired);
+    Double getConcentrationAtTime(LocalDateTime localDateTime);
 
     /**
      * Save Medicine to a file.
-     * By default, save directory is same directory as the application.
+     * By default, save directory is user's home directory.
      * Dose and Medicine MUST implement Serializable for this feature to work.
      *
      * @param filename Name of save file to be saved.
@@ -69,7 +52,7 @@ public interface IAction {
 
     /**
      * Load a saved Medicine file.
-     * By default, load directory is same directory as the application.
+     * By default, load directory is user's home directory.
      * Dose and Medicine MUST implement Serializable for this feature to work.
      *
      * @param filename Name of the file to be loaded
@@ -90,31 +73,10 @@ public interface IAction {
      */
     void printMedicine();
 
-
-    /**
-     * Calculates concentration amount of doses at a specific time.
-     *
-     * @param time Specific time used to determine concentration amount.
-     * @return ArrayList with the concentration amounts.
-     */
-    ArrayList<Double> getCurrentConcentration(LocalTime time);
-
-    /**
-     * Prints concentration amount of doses at a specific time.
-     *
-     * @param time Specific time used to determine concentration amount.
-     */
-    void printCurrentConcentration(LocalTime time);
+    //Advanced Features
 
     /**
      * Removes all test doses.
      */
     void removeTestDoses();
-
-    /**
-     * Retrieves the Medicine instance.
-     *
-     * @return Medicine instance
-     */
-    IMedicine getMedicine();
 }

@@ -1,19 +1,20 @@
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Scanner;
 
 //User Interface
 public class Controller {
 
-    static Scanner userInput = new Scanner(System.in);
-    static Action action = new Action();
+    static private Scanner userInput = new Scanner(System.in);
+    static private Action action = new Action();
 
     /**
      * Generates LocalTime instance from user input.
      * Validates the user input to minimize application crash due to unexpected errors.
      *
-     * @return LocalTime instance.
+     * @return LocalDateTime instance.
      */
-    public static LocalTime createLocalTime() {
+    private static LocalTime createLocalTime() {
         int hour;
         int minute;
 
@@ -36,10 +37,21 @@ public class Controller {
         return LocalTime.now();
     }
 
+    private static LocalDateTime createLocalDateTime() {
+        String dateTime;
+
+        System.out.print("Enter date (such as 2007-12-03T10:15:30) ");
+        //validateDateString() validate string with regex
+
+        dateTime = userInput.next();
+
+        return LocalDateTime.parse(dateTime);
+    }
+
     /**
      * Creates a Medicine instance from user input.
      */
-    public static void createMedicine() {
+    private static void createMedicine() {
         System.out.print("Enter medicine name: ");
         String name = userInput.next();
 
@@ -57,9 +69,9 @@ public class Controller {
      *
      * @return A Dose instance
      */
-    public static IDose createDose() {
+    private static IDose createDose() {
         System.out.println("Create a dose");
-        LocalTime takeTime = createLocalTime();
+        LocalDateTime takeTime = createLocalDateTime();
 
         System.out.print("Enter dose amount: ");
         checkIfValidNumber();
@@ -72,12 +84,12 @@ public class Controller {
     /**
      * Removes dose using an index selected by the user.
      */
-    public static void removeDose() {
+    private static void removeDose() {
         System.out.print("Enter dose index: ");
         int index = userInput.nextInt();
         if (index < action.getMedicine().getDoses().size()) {
             action.removeDose(index);
-        }else{
+        } else {
             System.out.println("Invalid index");
         }
     }
@@ -86,7 +98,7 @@ public class Controller {
      * Validates if user input is an integer only.
      * If input is not an integer, the program stops.
      */
-    public static void checkIfInteger() {
+    private static void checkIfInteger() {
         if (!userInput.hasNextInt()) {
             System.out.println("Error: Input is not an integer number");
             System.exit(1);
@@ -97,7 +109,7 @@ public class Controller {
      * Validates if user input is a number, either Integer or Double.
      * If input is not an number, the program stops.
      */
-    public static void checkIfValidNumber() {
+    private static void checkIfValidNumber() {
         if (!(userInput.hasNextInt() || userInput.hasNextDouble())) {
             System.out.println("Error: Input is not a valid number");
             System.exit(1);
@@ -116,14 +128,14 @@ public class Controller {
     /**
      * Pause scrolling fot the console screen until user hits the Enter key.
      */
-    public static void pause() {
+    private static void pause() {
         System.out.println("Press \"ENTER\" to continue...");
         userInput.nextLine();
         userInput.nextLine();
     }
 
     /**
-     * Starts the program.
+     * Starts the
      * Display a welcome screen which allows the user to select whether to create a file or open an existing one.
      */
     private static void start() {
@@ -159,8 +171,8 @@ public class Controller {
      * Display the list of actions that can be performed by the application.
      * The user must enter the corresponding number to execute the action.
      */
-    public static void selectAction() {
-        //Executes this screen until the user exit the program.
+    private static void selectAction() {
+        //Executes this screen until the user exit the
         do {
             IDose d;
 
@@ -211,7 +223,7 @@ public class Controller {
                 //Display concentration amount at current time
                 case "5":
                     clear();
-                    action.printCurrentConcentration(LocalTime.now());
+                    action.printConcentrationAtTime(LocalDateTime.now());
                     pause();
                     clear();
                     break;
@@ -219,7 +231,7 @@ public class Controller {
                 //Display concentration amount at specified time
                 case "6":
                     clear();
-                    action.printCurrentConcentration(createLocalTime());
+                    action.printConcentrationAtTime(createLocalDateTime());
                     pause();
                     clear();
                     break;
@@ -241,7 +253,7 @@ public class Controller {
                     break;
 
                 //Display peak level of doses. It can include test doses if desired.
-                case "9":
+                /*case "9":
                     System.out.println("1. Include test doses");
                     System.out.println("2. Do NOT include test doses");
                     System.out.print("Enter a number: ");
@@ -282,7 +294,7 @@ public class Controller {
                 case "11":
                     action.removeTestDoses();
                     clear();
-                    break;
+                    break;*/
 
                 //Closes the application
                 case "exit":
