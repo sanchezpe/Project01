@@ -79,36 +79,4 @@ public interface IAction {
      * Removes all test doses.
      */
     void removeTestDoses();
-
-    /**
-     * Time when the concentration is at its peak.
-     * It allows the user to choose if test doses will be displayed or not.
-     *
-     * @param includeTestDoses Determines whether test doses will be displayed.
-     * @return ArrayList containing peak concentration peak values of each dose.
-     */
-    //ArrayList<LocalDateTime> getPeakConcentrationTime(Boolean includeTestDoses);
-
-    /**
-     * Print concentration peaks. Includes dose information and its concentration peak.
-     *
-     * @param includeTestDoses Determines whether test doses will be displayed.
-     */
-    //void printPeakConcentrationTime(Boolean includeTestDoses);
-
-    /**
-     * Determines time when the patient should take next dose.
-     *
-     * @param concentrationDesired Dose amount desired sought.
-     * @return Time when the patient have to take next dose.
-     */
-    //ArrayList<LocalDateTime> getWhenToDose(Double concentrationDesired);
-
-    /**
-     * Prints when the patient should take next dose.
-     * Includes dose information and time to take next dose.
-     *
-     * @param amountDesired Dose amount desired sought.
-     */
-    //void printWhenToDose(Double amountDesired);
 }

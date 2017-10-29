@@ -9,30 +9,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="926be1da-a477-4d96-a7f8-0c8c2bcf800e" name="Default" comment="Implemented LocalDateTime for Doses&#10;Implemented additional methods in Medicine and Dose&#10;Implemented additional methods in Action&#10;Removed unused - non working methods in Action&#10;Created new tests with updated methods&#10;All basic features implemented&#10;Advanced feature: Test dose implemented">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/test/Project01/ActionTest.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project01/Action.class" afterPath="$PROJECT_DIR$/out/production/Project01/Action.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project01/Controller.class" afterPath="$PROJECT_DIR$/out/production/Project01/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project01/Dose.class" afterPath="$PROJECT_DIR$/out/production/Project01/Dose.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project01/IAction.class" afterPath="$PROJECT_DIR$/out/production/Project01/IAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project01/IDose.class" afterPath="$PROJECT_DIR$/out/production/Project01/IDose.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project01/IMedicine.class" afterPath="$PROJECT_DIR$/out/production/Project01/IMedicine.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project01/Medicine.class" afterPath="$PROJECT_DIR$/out/production/Project01/Medicine.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/Project01/DoseTest.class" afterPath="$PROJECT_DIR$/out/test/Project01/DoseTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/Project01/MedicineTest.class" afterPath="$PROJECT_DIR$/out/test/Project01/MedicineTest.class" />
+    <list default="true" id="926be1da-a477-4d96-a7f8-0c8c2bcf800e" name="Default" comment="Documentation updated">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Project01_Documentation.pdf" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/Project01/ActionTest.class" afterPath="$PROJECT_DIR$/out/test/Project01/ActionTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Project01.iml" afterPath="$PROJECT_DIR$/Project01.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Action.java" afterPath="$PROJECT_DIR$/src/Action.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller.java" afterPath="$PROJECT_DIR$/src/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Dose.java" afterPath="$PROJECT_DIR$/src/Dose.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/IAction.java" afterPath="$PROJECT_DIR$/src/IAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/IDose.java" afterPath="$PROJECT_DIR$/src/IDose.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/IMedicine.java" afterPath="$PROJECT_DIR$/src/IMedicine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Medicine.java" afterPath="$PROJECT_DIR$/src/Medicine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/ActionTest.java" afterPath="$PROJECT_DIR$/tests/ActionTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/DoseTest.java" afterPath="$PROJECT_DIR$/tests/DoseTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/MedicineTest.java" afterPath="$PROJECT_DIR$/tests/MedicineTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -73,18 +55,18 @@
       <file leaf-file-name="IAction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="106" column="4" lean-forward="false" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="4" />
+            <state relative-caret-position="1680">
+              <caret line="81" column="1" lean-forward="true" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IMedicine.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IMedicine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IMedicine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="46" column="49" lean-forward="false" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
+            <state relative-caret-position="294">
+              <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,17 +77,17 @@
       <file leaf-file-name="IDose.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IDose.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
+            <state relative-caret-position="337">
               <caret line="33" column="7" lean-forward="false" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Medicine.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Medicine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Medicine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
+            <state relative-caret-position="630">
               <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -231,9 +213,9 @@
         <option value="$PROJECT_DIR$/tests/ActionTest.java" />
         <option value="$PROJECT_DIR$/src/Medicine.java" />
         <option value="$PROJECT_DIR$/src/Action.java" />
-        <option value="$PROJECT_DIR$/src/IAction.java" />
         <option value="$PROJECT_DIR$/src/IDose.java" />
         <option value="$PROJECT_DIR$/src/IMedicine.java" />
+        <option value="$PROJECT_DIR$/src/IAction.java" />
       </list>
     </option>
   </component>
@@ -623,8 +605,16 @@
       <workItem from="1509259868285" duration="319000" />
       <workItem from="1509260190891" duration="8379000" />
       <workItem from="1509299171524" duration="18000" />
-      <workItem from="1509299355961" duration="4467000" />
+      <workItem from="1509299355961" duration="5388000" />
     </task>
+    <task id="LOCAL-00001" summary="Implemented LocalDateTime for Doses&#10;Implemented additional methods in Medicine and Dose&#10;Implemented additional methods in Action&#10;Removed unused - non working methods in Action&#10;Created new tests with updated methods&#10;All basic features implemented&#10;Advanced feature: Test dose implemented">
+      <created>1509306608213</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1509306608213</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -660,7 +650,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50103000" />
+    <option name="totallyTimeSpent" value="51024000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -673,7 +663,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -684,12 +673,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31776765" sideWeight="0.5021482" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28929386" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28929386" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17669173" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17669173" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.49785176" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -701,7 +691,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.49785176" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -749,7 +738,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1049,16 +1038,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="106" column="4" lean-forward="false" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="4" />
+        <state relative-caret-position="1680">
+          <caret line="81" column="1" lean-forward="true" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Medicine.java">
+    <entry file="file://$PROJECT_DIR$/src/IMedicine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+        <state relative-caret-position="294">
+          <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1067,16 +1056,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IDose.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
+        <state relative-caret-position="337">
           <caret line="33" column="7" lean-forward="false" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/IMedicine.java">
+    <entry file="file://$PROJECT_DIR$/src/Medicine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="46" column="49" lean-forward="false" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
+        <state relative-caret-position="630">
+          <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
