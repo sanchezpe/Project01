@@ -29,23 +29,49 @@ public class Controller {
         //checks if hour and minute is within valid range
         if ((hour >= 0 && hour < 24) && (minute >= 0 && minute < 60)) {
             return LocalTime.of(hour, minute);
+        } else {
+            //if range is incorrect, use local time instead
+            System.out.println("Invalid time. Using current time instead.");
+            pause();
+            return LocalTime.now();
         }
-
-        //if range is incorrect, use local time instead
-        System.out.println("Invalid time. Using current time instead.");
-        pause();
-        return LocalTime.now();
     }
 
     private static LocalDateTime createLocalDateTime() {
         String dateTime;
 
         System.out.print("Enter date (such as 2007-12-03T10:15:30) ");
-        //validateDateString() validate string with regex
 
         dateTime = userInput.next();
 
-        return LocalDateTime.parse(dateTime);
+        /*
+        validate dateTime regex
+        First Part - LocalDate:
+            Group 1 - year: match 4 digits.
+
+            Group 2 - month: match one 0 followed by one digit from 1-9 OR
+                            match one 1 followed by one digit 0-2
+
+            Group 3 -  day: match one 0 followed by one digit from 1-9 OR
+                            match one 1,2 followed by one digit
+                            match one 3 followed by one digit from 0-1
+
+        Second Part - LocalTime
+            Group 1 - hour: match one 0-1 followed by one digit OR
+                            match one 2 followed by one digit from 0-3
+
+            Group 2 - min:  match one 0-5 followed by one digit
+
+            Group 3 - second: (optional) match one 0-5 followed by one digit.
+         */
+        if (dateTime.matches("(^\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])T" +
+                "([01]\\d|2[0-3]):([0-5]\\d)(:[0-5]\\d)?$")) {
+            return LocalDateTime.parse(dateTime);
+        } else {
+            System.out.println("Invalid dateTime. Using current dateTime instead.");
+            pause();
+            return LocalDateTime.now();
+        }
     }
 
     /**
@@ -58,7 +84,7 @@ public class Controller {
         System.out.println("Set up medicine TMax");
         LocalTime tMax = createLocalTime();
 
-        System.out.println("Setup medicine half life");
+        System.out.println("Set up medicine half life");
         LocalTime halfLife = createLocalTime();
 
         action.newFile(name, tMax, halfLife);
