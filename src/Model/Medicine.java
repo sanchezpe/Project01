@@ -1,37 +1,34 @@
+package Model;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 //Serializable eases the process of saving file
-class Medicine implements Serializable, IMedicine {
+public class Medicine implements Serializable, IMedicine {
     /**
      * Medicine name
      */
-    private String nameMedicine;
+    private String nameMedicine = "NotSet";
 
     /**
-     * Medicine tMax.
+     * Medicine tMax
      * Time when the concentration will be at its peak.
      */
-    private LocalTime timeMaxMedicine;
+    private LocalTime timeMaxMedicine = LocalTime.of(0, 0);
 
     /**
-     * Medicine half life.
+     * Medicine half life
      * Time it takes for the concentration to be reduced by half of its amount.
      */
-    private LocalTime timeHalfLifeMedicine;
+    private LocalTime timeHalfLifeMedicine = LocalTime.of(0, 0);
+    ;
+
+    /**
+     * Array of doses
+     */
     private ArrayList<IDose> doses = new ArrayList<>();
-
-    //default constructor
-    public Medicine() {
-    }
-
-    //parameterized constructor
-    public Medicine(String name, LocalTime tMax, LocalTime timeHalfLifeMedicine) {
-        createMedicine(name, tMax, timeHalfLifeMedicine);
-
-    }
 
     @Override
     public void createMedicine(String nameMedicine, LocalTime timeMaxMedicine, LocalTime timeHalfLifeMedicine) {
@@ -61,7 +58,9 @@ class Medicine implements Serializable, IMedicine {
     }
 
     @Override
-    public void addDose(IDose dose) {
+    public void addDose(LocalDateTime dateTimeTakeDose, double amount, Boolean isTestDose) {
+        IDose dose = new Dose();
+        dose.createDose(dateTimeTakeDose, amount, isTestDose);
         doses.add(dose);
     }
 
@@ -75,16 +74,6 @@ class Medicine implements Serializable, IMedicine {
         doses.remove(index);
     }
 
-    @Override
-    public Double getConcentrationsAtTime(LocalDateTime dateTime) {
-        Double concentrationsAtTime = 0.0;
-
-        for (IDose d : doses) {
-            concentrationsAtTime +=
-                    d.getConcentrationAtTime(dateTime, this.timeMaxMedicine, this.timeHalfLifeMedicine);
-        }
-        return concentrationsAtTime;
-    }
 
     @Override
     public String toString() {

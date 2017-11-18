@@ -1,110 +1,109 @@
+package View;
+
+import Controller.Controller;
+import Model.IDose;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Scanner;
 
 //User Interface
-public class Controller {
-
-    static private Scanner userInput = new Scanner(System.in);
-    static private Action action = new Action();
+public class View {
 
     /**
-     * Generates LocalTime instance from user input.
-     * Validates the user input to minimize application crash due to unexpected errors.
-     *
-     * @return LocalDateTime instance.
+     * Read from user input
      */
-    private static LocalTime createLocalTime() {
-        int hour;
-        int minute;
+    public static Scanner userInput = new Scanner(System.in);
+    private static Controller controller = new Controller();
 
-        System.out.print("Enter hour: ");
-        checkIfInteger();
-        hour = userInput.nextInt();
-
-        System.out.print("Enter minute: ");
-        checkIfInteger();
-        minute = userInput.nextInt();
-
-        //checks if hour and minute is within valid range
-        if ((hour >= 0 && hour < 24) && (minute >= 0 && minute < 60)) {
-            return LocalTime.of(hour, minute);
-        } else {
-            //if range is incorrect, use local time instead
-            System.out.println("Invalid time. Using current time instead.");
-            pause();
-            return LocalTime.now();
+    /**
+     * Prints Dose index, time taken, and quantity.
+     */
+    private static void printDoses() {
+        for (IDose dose : controller.getMedicine().getDoses()) {
+            //Dose implements toString method
+            System.out.println(controller.getMedicine().getDoses().indexOf(dose) + "  " + dose);
+            //System.out.println(getPrintSingleDose(dose));
+            //System.out.print(dose + "\n");
         }
     }
 
-    private static LocalDateTime createLocalDateTime() {
-        String dateTime;
+    /**
+     * Prints Medicine name, time max, and half life.
+     */
+    private static void printMedicine() {
+        System.out.println(controller.getMedicine());
+    }
 
-        System.out.print("Enter date (such as 2007-12-03T10:15:30) ");
-
-        dateTime = userInput.next();
-
-        /*
-        validate dateTime regex
-        First Part - LocalDate:
-            Group 1 - year: match 4 digits.
-
-            Group 2 - month: match one 0 followed by one digit from 1-9 OR
-                            match one 1 followed by one digit 0-2
-
-            Group 3 -  day: match one 0 followed by one digit from 1-9 OR
-                            match one 1,2 followed by one digit
-                            match one 3 followed by one digit from 0-1
-
-        Second Part - LocalTime
-            Group 1 - hour: match one 0-1 followed by one digit OR
-                            match one 2 followed by one digit from 0-3
-
-            Group 2 - min:  match one 0-5 followed by one digit
-
-            Group 3 - second: (optional) match one 0-5 followed by one digit.
-         */
-        if (dateTime.matches("(^\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])T" +
-                "([01]\\d|2[0-3]):([0-5]\\d)(:[0-5]\\d)?$")) {
-            return LocalDateTime.parse(dateTime);
-        } else {
-            System.out.println("Invalid dateTime. Using current dateTime instead.");
-            pause();
-            return LocalDateTime.now();
+    /**
+     * Prints concentration amount at specific time.
+     *
+     * @param dateTime Specific time to calculate concentration amount.
+     */
+    private static void printConcentrationAtTime(LocalDateTime dateTime) {
+        for (IDose dose : controller.getMedicine().getDoses()) {
+            System.out.println(dose + " is " + controller.getConcentrationAtTime(dose, dateTime));
         }
+        System.out.println("Total concentration amount at " + dateTime + " is " +
+                controller.getSumConcentrationsAtTime(dateTime));
+    }
+
+    /**
+     * Creates LocalDate from user input.
+     *
+     * @return LocalDate instance.
+     */
+    private static LocalDate createLocalDate() {
+        System.out.print("Enter a date with format 2007-12-03 ");
+        String date = userInput.nextLine();
+        return controller.createLocalDate(date);
+    }
+
+    /**
+     * Creates LocalTime instance from user input.
+     *
+     * @return Localtime instance.
+     */
+    private static LocalTime createLocalTime() {
+        System.out.print("Enter a time with format 10:15:30 ");
+        String time = userInput.nextLine();
+        return controller.createLocalTime(time);
     }
 
     /**
      * Creates a Medicine instance from user input.
      */
-    private static void createMedicine() {
+    private static void createNewFile() {
         System.out.print("Enter medicine name: ");
-        String name = userInput.next();
+        String name = userInput.nextLine();
 
-        System.out.println("Set up medicine TMax");
+        System.out.println("Enter medicine TMax");
+
         LocalTime tMax = createLocalTime();
 
-        System.out.println("Set up medicine half life");
+        System.out.println("Enter medicine half life");
         LocalTime halfLife = createLocalTime();
 
-        action.newFile(name, tMax, halfLife);
+        controller.newFile(name, tMax, halfLife);
     }
 
     /**
      * Creates Dose from user input.
      *
-     * @return A Dose instance
+     * @param isTest Defines whether is a test dose.
      */
-    private static IDose createDose() {
-        System.out.println("Create a dose");
-        LocalDateTime takeTime = createLocalDateTime();
+    private static void addDose(boolean isTest) {
+        System.out.println("Enter date dose is taken");
+        LocalDate date = createLocalDate();
+
+        System.out.println("Enter time dose is taken");
+        LocalTime time = createLocalTime();
 
         System.out.print("Enter dose amount: ");
-        checkIfValidNumber();
-
-        double amount = userInput.nextDouble();
-        return new Dose(takeTime, amount);
-
+        double amount = Controller.parseValidAmount();
+        userInput.nextLine();
+        controller.addDose(LocalDateTime.of(date, time), amount, isTest);
     }
 
     /**
@@ -112,33 +111,39 @@ public class Controller {
      */
     private static void removeDose() {
         System.out.print("Enter dose index: ");
-        int index = userInput.nextInt();
-        if (index < action.getMedicine().getDoses().size()) {
-            action.removeDose(index);
-        } else {
-            System.out.println("Invalid index");
+        int index = Controller.parseValidInt();
+        userInput.nextLine();
+        controller.removeDose(index);
+    }
+
+
+    /**
+     * Prints peak level of concentration. The output can be test Doses and actual Doses, or actual Doses only.
+     *
+     * @param includeTestDoses Define whether to consider test doses.
+     */
+    private static void printPeakLevelAt(Boolean includeTestDoses) {
+        for (IDose dose : controller.getMedicine().getDoses()) {
+            if (!includeTestDoses) {
+                if (!dose.getIsTestDose()) {
+                    System.out.println(dose + " Peak level will occur at " + controller.getPeakLevel(dose));
+                }
+            } else {
+                System.out.println(dose + " Peak level will occur at " + controller.getPeakLevel(dose));
+            }
         }
     }
 
     /**
-     * Validates if user input is an integer only.
-     * If input is not an integer, the program stops.
+     * Prints time when to dose to obtain specified dose amount.
+     *
+     * @param amountDose Dose amount.
      */
-    private static void checkIfInteger() {
-        if (!userInput.hasNextInt()) {
-            System.out.println("Error: Input is not an integer number");
-            System.exit(1);
-        }
-    }
-
-    /**
-     * Validates if user input is a number, either Integer or Double.
-     * If input is not an number, the program stops.
-     */
-    private static void checkIfValidNumber() {
-        if (!(userInput.hasNextInt() || userInput.hasNextDouble())) {
-            System.out.println("Error: Input is not a valid number");
-            System.exit(1);
+    private static void printWhenToDose(double amountDose) {
+        for (IDose dose : controller.getMedicine().getDoses()) {
+            if (!dose.getIsTestDose()) {
+                System.out.println(dose + " Dose amount " + amountDose + " will be at " + controller.getWhenToDose(dose, amountDose));
+            }
         }
     }
 
@@ -146,7 +151,7 @@ public class Controller {
      * Clears the console screen.
      */
     private static void clear() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             System.out.println();
         }
     }
@@ -154,14 +159,14 @@ public class Controller {
     /**
      * Pause scrolling fot the console screen until user hits the Enter key.
      */
-    private static void pause() {
+    public static void pause() {
         System.out.println("Press \"ENTER\" to continue...");
         userInput.nextLine();
-        userInput.nextLine();
+        //userInput.nextLine();
     }
 
+
     /**
-     * Starts the
      * Display a welcome screen which allows the user to select whether to create a file or open an existing one.
      */
     private static void start() {
@@ -171,14 +176,14 @@ public class Controller {
         System.out.println("2. Load existing file");
         System.out.print("Enter a number: ");
 
-        switch (userInput.next()) {
+        switch (userInput.nextLine()) {
             case "1":
-                createMedicine();
+                createNewFile();
                 clear();
                 break;
             case "2":
                 System.out.print("Enter filename: ");
-                action.loadFile(userInput.next());
+                controller.loadFile(userInput.nextLine());
                 clear();
                 break;
 
@@ -195,14 +200,12 @@ public class Controller {
 
     /**
      * Display the list of actions that can be performed by the application.
-     * The user must enter the corresponding number to execute the action.
+     * The user must enter the corresponding number to execute the controller.
      */
     private static void selectAction() {
         //Executes this screen until the user exit the
         do {
-            IDose d;
-
-            action.printMedicine();
+            printMedicine();
             System.out.println("What do you want to do?");
             System.out.println("1. List all doses");
             System.out.println("2. Add a dose");
@@ -218,46 +221,46 @@ public class Controller {
             System.out.println("11. Remove all test doses");
             System.out.print("Enter a number: ");
 
-            switch (userInput.next()) {
+            switch (userInput.nextLine()) {
                 //List doses
                 case "1":
                     clear();
-                    action.printDoses();
+                    printDoses();
                     pause();
                     clear();
                     break;
 
                 //Add a dose
                 case "2":
-                    action.addDose(createDose());
+                    addDose(false);
                     clear();
                     break;
 
                 //Remove a dose
                 case "3":
                     removeDose();
-                    pause();
+                    //pause();
                     clear();
                     break;
 
                 //Remove all doses
                 case "4":
-                    action.removeAllDoses();
+                    controller.removeAllDoses();
                     clear();
                     break;
 
                 //Display concentration amount at current time
                 case "5":
                     clear();
-                    action.printConcentrationAtTime(LocalDateTime.now());
+                    printConcentrationAtTime(LocalDateTime.now());
                     pause();
                     clear();
                     break;
 
                 //Display concentration amount at specified time
                 case "6":
-                    clear();
-                    action.printConcentrationAtTime(createLocalDateTime());
+                    //clear();
+                    printConcentrationAtTime(LocalDateTime.of(createLocalDate(), createLocalTime()));
                     pause();
                     clear();
                     break;
@@ -265,35 +268,33 @@ public class Controller {
                 //Save Medicine to a file and closes the program
                 case "7":
                     System.out.print("Enter filename: ");
-                    action.saveFile(userInput.next());
+                    controller.saveFile(userInput.nextLine());
                     System.exit(0);
                     break;
 
                 //Advanced features
                 //Add a test dose
                 case "8":
-                    d = createDose();
-                    d.setTestDose();
-                    action.addDose(d);
+                    addDose(true);
                     clear();
                     break;
 
                 //Display peak level of doses. It can include test doses if desired.
-                /*case "9":
+                case "9":
                     System.out.println("1. Include test doses");
                     System.out.println("2. Do NOT include test doses");
                     System.out.print("Enter a number: ");
 
-                    switch (userInput.next()) {
+                    switch (userInput.nextLine()) {
                         case "1":
                             clear();
-                            action.printPeakConcentrationTime(true);
+                            printPeakLevelAt(true);
                             pause();
                             clear();
                             break;
                         case "2":
                             clear();
-                            action.printPeakConcentrationTime(false);
+                            printPeakLevelAt(false);
                             pause();
                             clear();
                             break;
@@ -308,19 +309,20 @@ public class Controller {
                 //Display when to dose
                 case "10":
                     System.out.print("Enter dose amount: ");
-                    checkIfValidNumber();
-
+                    //necessary to print nicely
+                    double dummyInput = Controller.parseValidAmount();
+                    userInput.nextLine();
                     clear();
-                    action.printWhenToDose(userInput.nextDouble());
+                    printWhenToDose(dummyInput);
                     pause();
                     clear();
                     break;
 
                 //Remove all test doses
                 case "11":
-                    action.removeTestDoses();
+                    controller.removeTestDoses();
                     clear();
-                    break;*/
+                    break;
 
                 //Closes the application
                 case "exit":

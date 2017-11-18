@@ -1,3 +1,5 @@
+package Model;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -6,21 +8,21 @@ public interface IMedicine {
     /**
      * Name of medicine.
      *
-     * @return Return name of the medicine.
+     * @return Name of the medicine.
      */
     String getNameMedicine();
 
     /**
      * Half life time of the medicine.
      *
-     * @return Return the half life time of the medicine.
+     * @return Half life time of the medicine.
      */
     LocalTime getTimeHalfLifeMedicine();
 
     /**
      * Tmax of medicine
      *
-     * @return Return TMax of medicine.
+     * @return TMax of the medicine.
      */
     LocalTime getTimeMaxMedicine();
 
@@ -32,43 +34,44 @@ public interface IMedicine {
     ArrayList<IDose> getDoses();
 
     /**
-     * Creates a medicine object.
+     * Creates a Medicine instance.
      *
      * @param nameMedicine         Name of medicine.
-     * @param timeMaxMedicine      Time when medicine is at its peak concentration.
+     * @param timeMaxMedicine      Time required for medicine to be at its peak concentration.
      * @param timeHalfLifeMedicine Time required for medicine to decrease by half.
      */
     void createMedicine(String nameMedicine, LocalTime timeMaxMedicine, LocalTime timeHalfLifeMedicine);
 
     /**
-     * Calculate the total concentration amount of the medicine (sum of all doses amount )at a specific dateTime.
+     * Add a Dose to doses array.
      *
-     * @param dateTime specified dateTame
-     * @return Concentration amount of dose at a specified time.
+     * @param dateTimeTakeDose Time dose is taken.
+     * @param amount           Amount of dose.
+     * @param isTestDose       defines whether is test dose.
      */
-    Double getConcentrationsAtTime(LocalDateTime dateTime);
+    void addDose(LocalDateTime dateTimeTakeDose, double amount, Boolean isTestDose);
 
     /**
-     * Create an IDose Object
-     *
-     * @param dose IDose Object
-     */
-    void addDose(IDose dose);
-
-    /**
-     * Removes all doses from the doses array in the medicine
+     * Removes all doses from the doses array in the medicine.
      */
     void removeAllDoses();
 
     /**
      * Remove a dose by its index.
      *
-     * @param index index of dose
+     * @param index index of dose.
      */
     void removeDose(int index);
 
     /**
-     * Remove all test doses from the doses array
+     * Remove all test doses from the doses array.
      */
     void removeTestDoses();
+
+    /**
+     * String representation of Medicine.
+     *
+     * @return String medicine name, time max, and half life.
+     */
+    String toString();
 }
