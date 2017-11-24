@@ -106,6 +106,27 @@ public class View {
         controller.addDose(LocalDateTime.of(date, time), amount, isTest);
     }
 
+    //Additional feature
+
+    /**
+     * Adds multiple dosages at once.
+     *
+     * @param isTest Defines wheter is a test dose.
+     */
+    private static void addMultipleDoses(boolean isTest) {
+        System.out.print("Enter number of doses to be added: ");
+        int numberOfDoses = userInput.nextInt();
+        userInput.nextLine();
+        if (numberOfDoses > 0) {
+            for (int i = 0; i < numberOfDoses; i++) {
+                addDose(isTest);
+            }
+        } else {
+            System.out.println("Invalid number of doses");
+            View.pause();
+        }
+    }
+
     /**
      * Removes dose using an index selected by the user.
      */
@@ -208,14 +229,14 @@ public class View {
             printMedicine();
             System.out.println("What do you want to do?");
             System.out.println("1. List all doses");
-            System.out.println("2. Add a dose");
+            System.out.println("2. Add doses");
             System.out.println("3. Remove a dose");
             System.out.println("4. Remove all doses");
             System.out.println("5. Display current concentration amount");
             System.out.println("6. Display concentration amount at a specific time");
             System.out.println("7. Save file and exit");
             System.out.println("\nAdvanced Features");
-            System.out.println("8. Add a test dose");
+            System.out.println("8. Add test doses");
             System.out.println("9. Time of highest peak");
             System.out.println("10. When to dose");
             System.out.println("11. Remove all test doses");
@@ -232,7 +253,8 @@ public class View {
 
                 //Add a dose
                 case "2":
-                    addDose(false);
+                    //addDose(false);
+                    addMultipleDoses(false);
                     clear();
                     break;
 
@@ -275,7 +297,8 @@ public class View {
                 //Advanced features
                 //Add a test dose
                 case "8":
-                    addDose(true);
+                    //addDose(true);
+                    addMultipleDoses(true);
                     clear();
                     break;
 
